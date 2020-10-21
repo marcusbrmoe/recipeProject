@@ -11,7 +11,10 @@
 	</style>
 </head>
 <body>
-	<h1>Recipes</h1>
+
+	<div class="jumbotron text-center">
+		<h1>Recipes</h1>
+	</div>
 	<!--
 	<h2 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h2>
 	-->
@@ -21,7 +24,7 @@
 			<th>Category</th>
 		</tr>
 		<tr th:if="${recipes.empty}">
-            <td colspan="2"> No Recipes Available </td>
+            <td> No Recipes Available </td>
         </tr>
 		<tr th:each="recipe : ${recipes}">
 			<td><a th:text="${recipe.name}" th:href="@{/recipe/{id}(id=${recipe.id})}"></a></td>

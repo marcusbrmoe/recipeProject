@@ -54,19 +54,31 @@ public class RecipeProjectApplication {
 			log.info("save a couple of recipes");
 			Recipe pizza = new Recipe("Pizza", 4, "A delicious Italian pizza!", crepository.findByName("Italian").get(0));
 			Recipe soup = new Recipe("Soup", 10, "A boring soup...", crepository.findByName("Dinner").get(0));
-			/*
-			pizza.addIngredient(new Ingredient("Water", 2.5, murepository.findByName("dl")));
-			pizza.addIngredient(new Ingredient("Flour", 1, murepository.findByName("kg")));
-			pizza.addStep(new CookingStep(1, "Mix all dry ingredients."));
-			pizza.addStep(new CookingStep(2, "Add water."));
-			System.out.println(pizza.toString());
 			
-			soup.addIngredient(new Ingredient("Water", 4, murepository.findByName("l")));
-			soup.addIngredient(new Ingredient("Salt", 4, murepository.findByName("Teaspoon(s)")));
-			soup.addStep(new CookingStep(1, "Boil water."));
-			soup.addStep(new CookingStep(2, "Add salt."));
-			System.out.println(soup.toString());
-			*/
+			log.info("save a couple of ingredients");
+			Ingredient pizzaFlour = new Ingredient("Flour", 1, murepository.findByName("kg"));
+			Ingredient pizzaWater = new Ingredient("Water", 2.5, murepository.findByName("dl"));
+			Ingredient soupWater = new Ingredient("Water", 4, murepository.findByName("l"));
+			Ingredient soupSalt = new Ingredient("Salt", 4, murepository.findByName("Teaspoon(s)"));
+			
+			log.info("save a couple of cooking steps");
+			CookingStep pizzaOne = new CookingStep(1, "Mix all dry ingredients.");
+			CookingStep pizzaTwo = new CookingStep(2, "Add water.");
+			CookingStep soupOne = new CookingStep(1, "Boil water.");
+			CookingStep soupTwo = new CookingStep(2, "Add salt.");
+			
+			pizza.addIngredient(pizzaWater);
+			pizza.addIngredient(pizzaFlour);
+			
+			pizza.addStep(pizzaOne);
+			pizza.addStep(pizzaTwo);
+			
+			soup.addIngredient(soupWater);
+			soup.addIngredient(soupSalt);
+			
+			soup.addStep(soupOne);
+			soup.addStep(soupTwo);
+			
 			repository.save(pizza);
 			repository.save(soup);
 			

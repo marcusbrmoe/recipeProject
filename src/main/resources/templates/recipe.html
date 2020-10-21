@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" 
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-	<title>Recipes</title>
+	<title th:text="${recipe.name}"></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" 
 		th:href="@{css/bootstrap.min.css}" />
@@ -11,7 +11,29 @@
 	</style>
 </head>
 <body>
-	<h1></h1>
+	
+	<div class="jumbotron text-center containter">
+		<div class="row">
+			<h1 class="col-sm-4" th:text="${recipe.name}"></h1>
+			<p class="col-sm-4" th:text="${recipe.category.name}"></p>
+		</div>
+		
+		<div class="row" th:text="${recipe.desc}"></div>
+		
+	</div>
+	
+	
+	<div th:object="${recipe}">
+		<div th:text="*{servings} + ' servings'"></div>
+		<br />
+		<div th:each="ingredient : *{ingredients}">
+			<div th:text="${ingredient.name} + ' ' + ${ingredient.amount} + ' ' + ${ingredient.mu.name}"></div>
+		</div>
+		<br />
+		<div th:each="step : *{steps}">
+			<div th:text="${step.stepNum} + '. ' + ${step.desc}"></div>
+		</div>
+	</div>
 
 
 </body>
