@@ -5,6 +5,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -23,11 +24,19 @@ public class Ingredient {
 	private MeasuringUnit mu; 
 	
 	@ManyToOne
+    @JoinColumn(name="recipeId")
 	@JsonManagedReference
 	private Recipe recipe;
 
 	public Ingredient() {
 		super();
+	}
+
+	public Ingredient(String name, double amount, MeasuringUnit mu) {
+		super();
+		this.name = name;
+		this.amount = amount;
+		this.mu = mu;
 	}
 
 	public Ingredient(String name, double amount, MeasuringUnit mu, Recipe recipe) {
@@ -36,13 +45,6 @@ public class Ingredient {
 		this.amount = amount;
 		this.mu = mu;
 		this.recipe = recipe;
-	}
-
-	public Ingredient(String name, double amount, MeasuringUnit mu) {
-		super();
-		this.name = name;
-		this.amount = amount;
-		this.mu = mu;
 	}
 
 	public long getId() {

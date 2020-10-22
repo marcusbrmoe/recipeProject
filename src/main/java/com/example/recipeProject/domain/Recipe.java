@@ -1,7 +1,5 @@
 package com.example.recipeProject.domain;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +20,7 @@ public class Recipe {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id; 
+	private long recipeId; 
 	private String name;
 	private int servings;
 	private String desc;
@@ -33,18 +31,17 @@ public class Recipe {
 	private Category category;
 	
 	@JsonBackReference
-	@OneToMany(cascade = CascadeType.ALL,
-    mappedBy = "recipe", orphanRemoval = true)
-	private List<Ingredient> ingredients;
+	@OneToMany(mappedBy = "recipe", orphanRemoval = true)
+	private List<Ingredient> ingredients = new ArrayList<Ingredient>();
 	
 	@JsonBackReference
-	@OneToMany(cascade = CascadeType.ALL,
-    mappedBy = "recipe", orphanRemoval = true)
-	private List<CookingStep> steps;
+	@OneToMany(mappedBy = "recipe", orphanRemoval = true)
+	private List<CookingStep> steps = new ArrayList<CookingStep>();
 	
 	public Recipe() {
 		super();
 	}
+
 	
 	public Recipe(String name, int servings, String desc, Category category) {
 		super();
@@ -52,9 +49,8 @@ public class Recipe {
 		this.servings = servings;
 		this.desc = desc;
 		this.category = category;
-		this.ingredients = new ArrayList<Ingredient>();
-		this.steps = new ArrayList<CookingStep>();
 	}
+
 
 	public Recipe(String name, int servings, String desc, Category category, List<Ingredient> ingredients,
 			List<CookingStep> steps) {
@@ -67,12 +63,12 @@ public class Recipe {
 		this.steps = steps;
 	}
 	
-	public long getId() {
-		return id;
+	public long getRecipeId() {
+		return recipeId;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setRecipeId(long id) {
+		this.recipeId = id;
 	}
 
 	public String getName() {
@@ -134,8 +130,8 @@ public class Recipe {
 	}
 
 	public void addStep(CookingStep step) {
+		step.setRecipe(this);
 		steps.add(step);
-        step.setRecipe(this);
     }
  
     public void removeStep(CookingStep step) {

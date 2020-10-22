@@ -27,13 +27,16 @@
             <td> No Recipes Available </td>
         </tr>
 		<tr th:each="recipe : ${recipes}">
-			<td><a th:text="${recipe.name}" th:href="@{/recipe/{id}(id=${recipe.id})}"></a></td>
+			<td><a th:text="${recipe.name}" th:href="@{/recipe/{id}(id=${recipe.recipeId})}"></a></td>
 			<td th:text="${recipe.category.name}"></td>
+			
+			<td><a th:href="@{/delete/{id}(id=${recipe.recipeId})}" class="btn btn-danger">Delete</a></td>
+			<td><a th:href="@{/edit/{id}(id=${recipe.recipeId})}" class="btn btn-info">Edit</a></td>
 			<!-- 
 			<td sec:authorize="hasAuthority('ADMIN')">
-				<a th:href="@{/delete/{id}(id=${resipe.id})}" class="btn btn-danger">Delete</a></td>
+				<a th:href="@{/delete/{id}(id=${recipe.recipeId})}" class="btn btn-danger">Delete</a></td>
 			<td sec:authorize="hasAuthority('ADMIN')">
-				<a th:href="@{/edit/{id}(id=${resipe.id})}" class="btn btn-info">Edit</a></td>
+				<a th:href="@{/edit/{id}(id=${recipe.recipeId})}" class="btn btn-info">Edit</a></td>
 			 -->
 		</tr>
 	</table>

@@ -32,11 +32,11 @@ public class Category {
 		this.name = name;
 	}
 
-	public long getId() {
+	public long getCategoryId() {
 		return categoryId;
 	}
 
-	public void setId(long categoryId) {
+	public void setCategoryId(long categoryId) {
 		this.categoryId = categoryId;
 	}
 

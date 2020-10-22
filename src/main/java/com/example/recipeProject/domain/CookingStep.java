@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -18,13 +19,14 @@ public class CookingStep {
 	private String desc;
 	
 	@ManyToOne
+    @JoinColumn(name="recipeId")
 	@JsonManagedReference
 	private Recipe recipe;
 
 	public CookingStep() {
 		super();
 	}
-
+	
 	public CookingStep(int stepNum, String desc) {
 		super();
 		this.stepNum = stepNum;
