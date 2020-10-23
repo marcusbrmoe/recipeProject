@@ -1,12 +1,14 @@
 package com.example.recipeProject.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.example.recipeProject.domain.Category;
 import com.example.recipeProject.domain.CategoryRepository;
 import com.example.recipeProject.domain.CookingStep;
 import com.example.recipeProject.domain.CookingStepRepository;
@@ -33,7 +35,15 @@ public class RecipeController {
 	@RequestMapping(value={"/recipelist", "/"}, method=RequestMethod.GET)
 	public String recipeList(Model model) {
 		model.addAttribute("recipes", repository.findAll());
+		model.addAttribute("categories", crepository.findAll());
 		return "recipelist";
+	}
+	
+	@RequestMapping(value="/recipelist/{category}", method=RequestMethod.GET)
+	public String recipeByCatList(@PathVariable("category") Category category, Model model) {
+		model.addAttribute("recipes", repository.findByCategory(category));
+		model.addAttribute("categories", crepository.findAll());
+		return "redirect:../recipelist";
 	}
 	
 	@RequestMapping(value="/recipe/{id}", method=RequestMethod.GET)
@@ -75,7 +85,7 @@ public class RecipeController {
 			
 		}
 		
-		//Adding recipe reference to CookingSteps and deleting redundant objects.
+		//Adding recipe reference and "stepNum" to CookingSteps, and deleting redundant objects.
 		for (int i = 0 ; i < recipe.getSteps().size(); i++) {
 			CookingStep x = recipe.getSteps().get(i);
 			if (x.getDesc().isEmpty() || x.getDesc() == null) {
@@ -92,12 +102,14 @@ public class RecipeController {
 		return "redirect:recipelist";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET) 
 	public String deleteRecipe(@PathVariable("id") long id, Model model) {
 		repository.deleteById(id);
 		return "redirect:../recipelist";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
 	public String editRecipe(@PathVariable("id") long id, Model model) {
 		Recipe one = repository.findById(id).get();
@@ -114,5 +126,10 @@ public class RecipeController {
 		model.addAttribute("categories", crepository.findAll());
 		model.addAttribute("measuringunits", murepository.findAll());
 		return "editrecipe";
+	}
+	
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	public String login() {
+		return "login";
 	}
 }

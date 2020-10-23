@@ -15,9 +15,21 @@
 	<div class="jumbotron text-center">
 		<h1>Recipes</h1>
 	</div>
-	<!--
+	
 	<h2 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h2>
-	-->
+	 
+	<form action="#" th:action="@{recipelist/{category}(category=*{category})}" method="get">
+		<div class="row">
+			<label for="catlist">Find by category:</label>
+			<select id="catlist" th:field="${categories}" class="col form-control">
+			<option th:each="category : ${categories}"
+				th:value="${category.categoryId}"
+				th:text="${category.name}"></option>
+			</select>
+			<input type="submit" value="Find" class="btn btn-primary"/>
+		</div>
+	</form>
+	
 	<table class="table table-striped">
 		<tr>
 			<th>Name</th>
@@ -27,17 +39,15 @@
             <td> No Recipes Available </td>
         </tr>
 		<tr th:each="recipe : ${recipes}">
-			<td><a th:text="${recipe.name}" th:href="@{/recipe/{id}(id=${recipe.recipeId})}"></a></td>
+			<td th:text="${recipe.name}"></td>
 			<td th:text="${recipe.category.name}"></td>
+			<td><a th:href="@{/recipe/{id}(id=${recipe.recipeId})}" class="btn btn-success">SHOW</a></td>
 			
-			<td><a th:href="@{/delete/{id}(id=${recipe.recipeId})}" class="btn btn-danger">Delete</a></td>
-			<td><a th:href="@{/edit/{id}(id=${recipe.recipeId})}" class="btn btn-info">Edit</a></td>
-			<!-- 
 			<td sec:authorize="hasAuthority('ADMIN')">
 				<a th:href="@{/delete/{id}(id=${recipe.recipeId})}" class="btn btn-danger">Delete</a></td>
 			<td sec:authorize="hasAuthority('ADMIN')">
 				<a th:href="@{/edit/{id}(id=${recipe.recipeId})}" class="btn btn-info">Edit</a></td>
-			 -->
+			 
 		</tr>
 	</table>
 	<a href="/add" class="btn btn-success">Add Recipe</a>

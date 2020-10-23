@@ -23,6 +23,7 @@ public class Ingredient {
 	@OneToOne(fetch = FetchType.EAGER)
 	private MeasuringUnit mu; 
 	
+	//Having Ingredient and CookingStep point to list? 
 	@ManyToOne
     @JoinColumn(name="recipeId")
 	@JsonManagedReference

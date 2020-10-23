@@ -89,27 +89,8 @@ public class RecipeProjectApplication {
 			csrepository.save(pizzaTwo);
 			csrepository.save(soupOne);
 			csrepository.save(soupTwo);
-			/*
-			log.info("add ingredients to recipes");
-			pizza.addIngredient(pizzaWater);
-			pizza.addIngredient(pizzaFlour);
-			soup.addIngredient(soupWater);
-			soup.addIngredient(soupSalt);
-			
-			log.info("add steps to recipes");
-			pizza.addStep(pizzaOne);
-			pizza.addStep(pizzaTwo);
-			soup.addStep(soupOne);
-			soup.addStep(soupTwo);
-			*/
 			
 		};
 	}
 
 }
-/*
-add("Sugar", 2, murepository.findByName("dl")); 
-add("Butter", 200, murepository.findByName("g")); 
-add(2, "Melt butter"); 
-add(3, "Mix together"); 
-*/
