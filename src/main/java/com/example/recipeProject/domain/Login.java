@@ -1,5 +1,6 @@
 package com.example.recipeProject.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,11 +10,20 @@ import javax.persistence.Id;
 public class Login {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long loginId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false, updatable = false)
+	private long id;
+	
+	@Column(name = "username", nullable = false, unique = true)
 	private String username;
+	
+	@Column(name = "password", nullable = false)
 	private String passwordHash;
+	
+	@Column(name = "email", nullable = false)
 	private String email;
+	
+	@Column(name = "role", nullable = false)
 	private String role;
 	
 	public Login() {
@@ -28,12 +38,12 @@ public class Login {
 		this.role = role;
 	}
 
-	public long getLoginId() {
-		return loginId;
+	public long getId() {
+		return id;
 	}
 
-	public void setLoginId(long loginId) {
-		this.loginId = loginId;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getUsername() {
@@ -70,7 +80,7 @@ public class Login {
 
 	@Override
 	public String toString() {
-		return "Login [loginId=" + loginId + ", username=" + username + ", passwordHash=" + passwordHash + ", email="
+		return "Login [loginId=" + id + ", username=" + username + ", passwordHash=" + passwordHash + ", email="
 				+ email + ", role=" + role + "]";
 	}
 }

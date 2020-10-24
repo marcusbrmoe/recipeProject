@@ -17,23 +17,20 @@
 	</div>
 	
 	<h2 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h2>
-	 
-	<form action="#" th:action="@{recipelist/{category}(category=*{category})}" method="get">
+	 <!--  
+	<form action="#" th:action="@{../recipelist/{categoryName}}" method="get">
 		<div class="row">
-			<label for="catlist">Find by category:</label>
-			<select id="catlist" th:field="${categories}" class="col form-control">
-			<option th:each="category : ${categories}"
-				th:value="${category.categoryId}"
-				th:text="${category.name}"></option>
-			</select>
+			<label for="categoryName">Search by category:</label>
+			<input type="text" th:name="categoryName" th:id="categoryName" placeholder="Category"/>
 			<input type="submit" value="Find" class="btn btn-primary"/>
 		</div>
 	</form>
-	
+	-->
 	<table class="table table-striped">
 		<tr>
 			<th>Name</th>
 			<th>Category</th>
+			<th>Actions</th>
 		</tr>
 		<tr th:if="${recipes.empty}">
             <td> No Recipes Available </td>
@@ -41,13 +38,15 @@
 		<tr th:each="recipe : ${recipes}">
 			<td th:text="${recipe.name}"></td>
 			<td th:text="${recipe.category.name}"></td>
-			<td><a th:href="@{/recipe/{id}(id=${recipe.recipeId})}" class="btn btn-success">SHOW</a></td>
+			<td class="row">
+				<div><a th:href="@{/recipe/{id}(id=${recipe.recipeId})}" class="btn btn-success">SHOW</a></div>
+				<div sec:authorize="hasAuthority('ADMIN')">
+					<a th:href="@{/delete/{id}(id=${recipe.recipeId})}" class="btn btn-danger">Delete</a></div>
+				<div sec:authorize="hasAuthority('ADMIN')">
+					<a th:href="@{/edit/{id}(id=${recipe.recipeId})}" class="btn btn-info">Edit</a></div>
+			</td>
 			
-			<td sec:authorize="hasAuthority('ADMIN')">
-				<a th:href="@{/delete/{id}(id=${recipe.recipeId})}" class="btn btn-danger">Delete</a></td>
-			<td sec:authorize="hasAuthority('ADMIN')">
-				<a th:href="@{/edit/{id}(id=${recipe.recipeId})}" class="btn btn-info">Edit</a></td>
-			 
+			
 		</tr>
 	</table>
 	<a href="/add" class="btn btn-success">Add Recipe</a>

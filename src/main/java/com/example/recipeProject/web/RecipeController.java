@@ -1,5 +1,8 @@
 package com.example.recipeProject.web;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -7,8 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.recipeProject.domain.Category;
 import com.example.recipeProject.domain.CategoryRepository;
 import com.example.recipeProject.domain.CookingStep;
 import com.example.recipeProject.domain.CookingStepRepository;
@@ -39,17 +42,57 @@ public class RecipeController {
 		return "recipelist";
 	}
 	
-	@RequestMapping(value="/recipelist/{category}", method=RequestMethod.GET)
-	public String recipeByCatList(@PathVariable("category") Category category, Model model) {
-		model.addAttribute("recipes", repository.findByCategory(category));
+	/*
+	@RequestMapping(value="/recipelist/{name}", method=RequestMethod.GET)
+	public String recipeByCatList(@PathVariable("name") String name, Model model) {
+		Iterable<Recipe> recipes = new ArrayList<Recipe>();
+		if (name == null || name.isEmpty()) {
+			recipes = repository.findAll();
+		} else {
+			Category one = crepository.findByName(name).get(0);
+			recipes = repository.findByCategory(one);
+			List<Recipe> catOk = new ArrayList<>(); 
+			for (Recipe recipe : recipes) {
+				if (recipe.getCategory().getName() == name) {
+					catOk.add(recipe);
+				}
+			}
+		}
+		
+		model.addAttribute("recipes", recipes);
 		model.addAttribute("categories", crepository.findAll());
 		return "redirect:../recipelist";
 	}
+	*/
 	
 	@RequestMapping(value="/recipe/{id}", method=RequestMethod.GET)
 	public String showRecipe(@PathVariable("id") long id, Model model) {
 		model.addAttribute("recipe", repository.findById(id).get());
 		return "recipe";
+	}
+	
+	//REST Show all Recipes.
+	@RequestMapping(value="/recipes", method=RequestMethod.GET)
+	public @ResponseBody List<Recipe> recipeListRest() {
+		return (List<Recipe>) repository.findAll();
+	}
+	
+	//REST Show all Ingredients.
+	@RequestMapping(value="/ingredients", method=RequestMethod.GET)
+	public @ResponseBody List<Ingredient> ingredientListRest() {
+		return (List<Ingredient>) irepository.findAll();
+	}
+	
+	//REST Show all CookingSteps.
+	@RequestMapping(value="/cookingsteps", method=RequestMethod.GET)
+	public @ResponseBody List<CookingStep> cookingStepListRest() {
+		return (List<CookingStep>) csrepository.findAll();
+	}
+		
+	//REST Show Recipe by ID.
+	@RequestMapping(value="/recipes/{id}", method=RequestMethod.GET)
+	public @ResponseBody Optional<Recipe> findRecipesRest(@PathVariable("id") long recipeId) {
+		return repository.findById(recipeId);
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.GET)

@@ -13,7 +13,7 @@ import com.example.recipeProject.domain.LoginRepository;
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
 
-private final LoginRepository repository;
+	private final LoginRepository repository;
 	
 	@Autowired
 	public UserDetailServiceImpl(LoginRepository userRepository) {
