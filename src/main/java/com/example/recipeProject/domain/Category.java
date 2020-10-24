@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Category {
@@ -19,7 +19,7 @@ public class Category {
 	private long categoryId;
 	private String name;
 	
-	@JsonBackReference
+	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "category")
 	private List<Recipe> recipes;
 

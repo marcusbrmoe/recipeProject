@@ -8,5 +8,4 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource
 public interface IngredientRepository extends CrudRepository<Ingredient, Long> {
 	List<Ingredient> findByName(String name);
-	List<Ingredient> findByRecipe(Recipe recipe);
 }

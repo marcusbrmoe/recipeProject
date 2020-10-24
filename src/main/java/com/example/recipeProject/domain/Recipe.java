@@ -3,6 +3,7 @@ package com.example.recipeProject.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,11 +31,11 @@ public class Recipe {
 	private Category category;
 	
 	@JsonBackReference
-	@OneToMany(mappedBy = "recipe", orphanRemoval = true)
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "recipe", orphanRemoval = true)
 	private List<Ingredient> ingredients = new ArrayList<Ingredient>();
 	
 	@JsonBackReference
-	@OneToMany(mappedBy = "recipe", orphanRemoval = true)
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "recipe", orphanRemoval = true)
 	private List<CookingStep> steps = new ArrayList<CookingStep>();
 	
 	public Recipe() {

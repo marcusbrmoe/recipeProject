@@ -58,7 +58,7 @@ public class RecipeProjectApplication {
 			murepository.save(new MeasuringUnit("l"));
 			murepository.save(new MeasuringUnit("dl"));
 			murepository.save(new MeasuringUnit("piece"));
-			
+			/*
 			log.info("create a couple of recipes");
 			Recipe pizza = new Recipe("Pizza", 4, "A delicious Italian pizza!", crepository.findByName("Italian").get(0));
 			Recipe soup = new Recipe("Soup", 10, "A boring soup...", crepository.findByName("Dinner").get(0));
@@ -89,7 +89,7 @@ public class RecipeProjectApplication {
 			csrepository.save(pizzaTwo);
 			csrepository.save(soupOne);
 			csrepository.save(soupTwo);
-			
+			*/
 		};
 	}
 
