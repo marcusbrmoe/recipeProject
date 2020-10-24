@@ -18,7 +18,7 @@
 			<p th:text="${recipe.category.name}"></p>
 		</div>
 		
-		<div th:text="${recipe.desc}"></div>
+		<div th:text="${recipe.description}"></div>
 	</div>
 	
 	
@@ -32,7 +32,7 @@
 		<br />
 		<h3>Directions:</h3>
 		<div th:each="step : *{steps}">
-			<div th:text="'Step ' + ${step.stepNum} + '. ' + ${step.desc}"></div>
+			<div th:text="'Step ' + ${step.step_num} + '. ' + ${step.description}"></div>
 		</div>
 	</div>
 	

@@ -11,64 +11,64 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
+@Table(name="recipe")
 public class Recipe {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long recipeId; 
+	private long recipe_id; 
 	private String name;
 	private int servings;
-	private String desc;
+	private String description;
 	
 	@ManyToOne
-	@JoinColumn(name = "categoryId")
+	@JoinColumn(name = "category_id")
 	@JsonManagedReference
 	private Category category;
 	
 	@JsonBackReference
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "recipe", orphanRemoval = true)
-	private List<Ingredient> ingredients = new ArrayList<Ingredient>();
+	private List<Ingredient> ingredients;
 	
 	@JsonBackReference
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "recipe", orphanRemoval = true)
-	private List<CookingStep> steps = new ArrayList<CookingStep>();
+	private List<CookingStep> steps;
 	
 	public Recipe() {
 		super();
 	}
-
 	
 	public Recipe(String name, int servings, String desc, Category category) {
 		super();
 		this.name = name;
 		this.servings = servings;
-		this.desc = desc;
+		this.description = desc;
 		this.category = category;
 	}
-
 
 	public Recipe(String name, int servings, String desc, Category category, List<Ingredient> ingredients,
 			List<CookingStep> steps) {
 		super();
 		this.name = name;
 		this.servings = servings;
-		this.desc = desc;
+		this.description = desc;
 		this.category = category;
 		this.ingredients = ingredients;
 		this.steps = steps;
 	}
 	
 	public long getRecipeId() {
-		return recipeId;
+		return recipe_id;
 	}
 
 	public void setRecipeId(long id) {
-		this.recipeId = id;
+		this.recipe_id = id;
 	}
 
 	public String getName() {
@@ -87,12 +87,12 @@ public class Recipe {
 		this.servings = servings;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String desc) {
+		this.description = desc;
 	}
 
 	public Category getCategory() {
@@ -137,8 +137,12 @@ public class Recipe {
     public void removeStep(CookingStep step) {
     	step.setRecipe(null);
         this.steps.remove(step);
-    }	
+    }
 
-
+	@Override
+	public String toString() {
+		return "Recipe [recipe_id=" + recipe_id + ", name=" + name + ", servings=" + servings + ", description="
+				+ description + ", category=" + category + ", ingredients=" + ingredients + ", steps=" + steps + "]";
+	}	
 	
 }

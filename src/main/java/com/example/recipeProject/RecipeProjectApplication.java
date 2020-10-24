@@ -38,11 +38,15 @@ public class RecipeProjectApplication {
 			CookingStepRepository csrepository) {
 		
 		return (args) -> {
-		
+			/*
+			log.info("Delete all users");
+			lrepository.deleteAll();
 			log.info("Create users");
 			lrepository.save(new Login("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "user@hh.fi", "USER"));
 			lrepository.save(new Login("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "admin@hh.fi", "ADMIN"));
 			
+			log.info("Delete all categories");
+			crepository.deleteAll();
 			log.info("save a couple of categories");
 			crepository.save(new Category("Dessert"));
 			crepository.save(new Category("Dinner"));
@@ -50,6 +54,8 @@ public class RecipeProjectApplication {
 			crepository.save(new Category("Cake"));
 			crepository.save(new Category("Indian"));
 			
+			log.info("Delete all measuring units");
+			murepository.deleteAll();
 			log.info("save a couple of measuringunits");
 			murepository.save(new MeasuringUnit("Teaspoon(s)"));
 			murepository.save(new MeasuringUnit("Tablespoon(s)"));
@@ -58,7 +64,7 @@ public class RecipeProjectApplication {
 			murepository.save(new MeasuringUnit("l"));
 			murepository.save(new MeasuringUnit("dl"));
 			murepository.save(new MeasuringUnit("piece"));
-			/*
+			
 			log.info("create a couple of recipes");
 			Recipe pizza = new Recipe("Pizza", 4, "A delicious Italian pizza!", crepository.findByName("Italian").get(0));
 			Recipe soup = new Recipe("Soup", 10, "A boring soup...", crepository.findByName("Dinner").get(0));

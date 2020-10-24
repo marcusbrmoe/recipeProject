@@ -1,31 +1,32 @@
 package com.example.recipeProject.domain;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
+@Table(name="ingredient")
 public class Ingredient {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
+	private long ingredient_id;
 	private String name; 
 	private double amount; 
 	
-	@OneToOne(fetch = FetchType.EAGER)
-	private MeasuringUnit mu; 
-	
-	//Having Ingredient and CookingStep point to list? 
 	@ManyToOne
-    @JoinColumn(name="recipeId")
+	@JoinColumn(name = "mu_id")
+	@JsonManagedReference
+	private MeasuringUnit mu; 
+	 
+	@ManyToOne
+    @JoinColumn(name="recipe_id")
 	@JsonManagedReference
 	private Recipe recipe;
 
@@ -48,12 +49,12 @@ public class Ingredient {
 		this.recipe = recipe;
 	}
 
-	public long getId() {
-		return id;
+	public long getIngredientId() {
+		return ingredient_id;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setIngredientId(long ingredientId) {
+		this.ingredient_id = ingredientId;
 	}
 
 	public String getName() {
@@ -90,8 +91,8 @@ public class Ingredient {
 
 	@Override
 	public String toString() {
-		return "Ingredient [id=" + id + ", name=" + name + ", amount=" + amount + ", mu=" + mu + ", recipe=" + recipe
-				+ "]";
+		return "Ingredient [ingredientId=" + ingredient_id + ", name=" + name + ", amount=" + amount + ", mu=" + mu
+				+ ", recipe=" + recipe + "]";
 	}
 	
 }

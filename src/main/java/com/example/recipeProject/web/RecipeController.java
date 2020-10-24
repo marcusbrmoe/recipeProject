@@ -119,10 +119,10 @@ public class RecipeController {
 		
 		//Adding recipe reference to Ingredients and deleting redundant objects.
 		for (Ingredient ingredient : recipe.getIngredients()) {
-			ingredient.setRecipe(recipe);
 			if (ingredient.getName().isEmpty() || ingredient.getName() == null) {
 				irepository.delete(ingredient);
 			} else {
+				ingredient.setRecipe(recipe);
 				irepository.save(ingredient);
 			}
 			
@@ -131,7 +131,7 @@ public class RecipeController {
 		//Adding recipe reference and "stepNum" to CookingSteps, and deleting redundant objects.
 		for (int i = 0 ; i < recipe.getSteps().size(); i++) {
 			CookingStep x = recipe.getSteps().get(i);
-			if (x.getDesc().isEmpty() || x.getDesc() == null) {
+			if (x.getDescription().isEmpty() || x.getDescription() == null) {
 				csrepository.delete(x);
 			} else if (x.getRecipe() == null) {
 				x.setRecipe(recipe);

@@ -26,19 +26,19 @@
 		</div>
 		<div class="form-group">
 			<label for="desc">Short Description:</label>
-			<input type="text" id="desc" th:field="*{desc}" class="form-control"/>
+			<input type="text" id="desc" th:field="*{description}" class="form-control"/>
 		</div>
 		<div class="form-group">
 			<label for="catlist">Category:</label>
 			<select id="catlist" th:field="*{category}" class="form-control">
 				<option th:each="category : ${categories}"
-						th:value="${category.categoryId}"
+						th:value="${category.category_id}"
 						th:text="${category.name}"></option>
 			</select>
 		</div>
 			
 		<div class="form-group">
-			<label for="ingredients">Ingredients:</label>
+			<h4>Ingredients:</h4>
 			<div id="ingredients">
 				<div class="row">
             		<div class="col form-group">Name</div>
@@ -47,27 +47,22 @@
              	</div>
              	<div class="row" th:each="ingredient, i : ${recipe.ingredients}">
              		<div class="col form-group d-none">
-                    	<input th:field="*{ingredients[__${i.index}__].id}" type="text" class="form-control">
+                    	<input th:field="*{ingredients[__${i.index}__].ingredient_id}" type="text" class="form-control">
                    	</div>
 					<input type="text" id="ingredientname" th:field="*{ingredients[__${i.index}__].name}" class="col form-control"/>
 					<input type="text" id="ingredientamount" th:field="*{ingredients[__${i.index}__].amount}" class="col form-control"/>
 					<select id="mulist" th:field="*{ingredients[__${i.index}__].mu}" class="col form-control">
 					<option th:each="mu : ${measuringunits}"
-						th:value="${mu.id}"
+						th:value="${mu.mu_id}"
 						th:text="${mu.name}"></option>
 					</select>
 				</div>
 			</div>
 		</div>
-			<br />
-			<div class="row">
-            	<div class="col">
-                	<button type="button" class="btn btn-success" onclick="addStep()">Add Step</button>
-            	</div>
-			</div>
+		<br />
 		
 		<div class="form-group">
-			<label for="steps">Directions:</label>
+			<h4>Directions:</h4>
 			<div>
 				<div class="row">
             		<div class="col form-group">Step number:</div>
@@ -76,17 +71,11 @@
           		<div id="steps" th:each="step, i : ${recipe.steps}">
           			<div class="row item form-group" id="${i.index}">
           				<input type="text" class="col-sm-2 form-control" th:value="${i.index} + 1" readonly/>
-       					<input type="text" class="col form-control" id="stepdesc" placeholder="Direction" th:field="*{steps[__${i.index}__].desc}">
+       					<input type="text" class="col form-control" id="stepdesc" placeholder="Direction" th:field="*{steps[__${i.index}__].description}">
 					</div>
           		</div>
 			</div>
 			<br />
-			<div class="row">
-            	<div class="col">
-                	<button type="button" class="btn btn-success" onclick="addRow()">Add Step</button>
-                	<button type="button" class="btn btn-danger" onclick="removeRow()">Delete Step</button>
-            </div>
-        </div>
 		</div>
 		
 		<input type="submit" value="Save" class="btn btn-primary"/>

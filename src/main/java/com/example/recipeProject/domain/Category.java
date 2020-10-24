@@ -8,19 +8,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
+@Table(name="category")
 public class Category {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long categoryId;
+	private long category_id;
 	private String name;
 	
-	@JsonManagedReference
-	@OneToMany(cascade = CascadeType.ALL,mappedBy = "category")
+	@JsonBackReference
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
 	private List<Recipe> recipes;
 
 	public Category() {
@@ -33,11 +35,11 @@ public class Category {
 	}
 
 	public long getCategoryId() {
-		return categoryId;
+		return category_id;
 	}
 
 	public void setCategoryId(long categoryId) {
-		this.categoryId = categoryId;
+		this.category_id = categoryId;
 	}
 
 	public String getName() {
@@ -58,7 +60,7 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [categoryId=" + categoryId + ", name=" + name + ", recipes=" + recipes + "]";
+		return "Category [categoryId=" + category_id + ", name=" + name + ", recipes=" + recipes + "]";
 	}
 	
 }
