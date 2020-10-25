@@ -6,12 +6,20 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" 
 			th:href="@{css/bootstrap.min.css}" />
+		<style>
+			form {
+				max-width: 800px;
+				margin: auto;
+			}
+		</style>
     </head>
     <body>
         <form th:action="@{/login}" method="post" class="text-center border border-light p-5">
-            <div class="form-group"><label> User Name : <input type="text" name="username" class="form-control" placeholder="Username" /> </label></div>
-            <div class="form-group"><label> Password: <input type="password" name="password" class="form-control" placeholder="Password"/> </label></div>
-           	<input type="submit" value="Login" class="btn btn-primary"/>
+        	<p class="h4 mb-4">Login</p>
+        	
+            <input type="text" name="username" class="form-control mb-4" placeholder="Username" />
+           	<input type="password" name="password" class="form-control mb-4" placeholder="Password"/>
+           	<input type="submit" value="Login" class="btn btn-primary col"/>
         </form>
         <div class="text-center">
     		<div th:if="${param.error}">
