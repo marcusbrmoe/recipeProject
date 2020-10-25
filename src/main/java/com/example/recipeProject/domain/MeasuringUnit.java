@@ -36,11 +36,11 @@ public class MeasuringUnit {
 		this.name = name;
 	}
 
-	public long getId() {
+	public long getMuId() {
 		return mu_id;
 	}
 
-	public void setId(long muId) {
+	public void setMuId(long muId) {
 		this.mu_id = muId;
 	}
 

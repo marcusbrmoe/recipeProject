@@ -57,10 +57,5 @@ public class Category {
 	public void setRecipes(List<Recipe> recipes) {
 		this.recipes = recipes;
 	}
-
-	@Override
-	public String toString() {
-		return "Category [categoryId=" + category_id + ", name=" + name + ", recipes=" + recipes + "]";
-	}
 	
 }

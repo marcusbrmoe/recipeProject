@@ -39,11 +39,11 @@
 			<td th:text="${recipe.name}"></td>
 			<td th:text="${recipe.category.name}"></td>
 			<td class="row">
-				<div><a th:href="@{/recipe/{id}(id=${recipe.recipe_id})}" class="btn btn-success">SHOW</a></div>
+				<div><a th:href="@{/recipe/{id}(id=${recipe.recipeId})}" class="btn btn-success">SHOW</a></div>
 				<div sec:authorize="hasAuthority('ADMIN')">
-					<a th:href="@{/delete/{id}(id=${recipe.recipe_id})}" class="btn btn-danger">Delete</a></div>
+					<a th:href="@{/delete/{id}(id=${recipe.recipeId})}" class="btn btn-danger">Delete</a></div>
 				<div sec:authorize="hasAuthority('ADMIN')">
-					<a th:href="@{/edit/{id}(id=${recipe.recipe_id})}" class="btn btn-info">Edit</a></div>
+					<a th:href="@{/edit/{id}(id=${recipe.recipeId})}" class="btn btn-info">Edit</a></div>
 			</td>
 			
 			
