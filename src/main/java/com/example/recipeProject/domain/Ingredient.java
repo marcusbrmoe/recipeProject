@@ -88,11 +88,5 @@ public class Ingredient {
 	public void setRecipe(Recipe recipe) {
 		this.recipe = recipe;
 	}
-
-	@Override
-	public String toString() {
-		return "Ingredient [ingredientId=" + ingredient_id + ", name=" + name + ", amount=" + amount + ", mu=" + mu
-				+ ", recipe=" + recipe + "]";
-	}
 	
 }

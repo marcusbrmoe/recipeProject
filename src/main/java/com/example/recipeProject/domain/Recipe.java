@@ -42,8 +42,8 @@ public class Recipe {
 	
 	public Recipe() {
 		super();
-		this.ingredients = new ArrayList<>();
-		this.steps = new ArrayList<>();
+		this.ingredients = new ArrayList<Ingredient>();
+		this.steps = new ArrayList<CookingStep>();
 	}
 	
 	public Recipe(String name, int servings, String desc, Category category) {
@@ -52,8 +52,8 @@ public class Recipe {
 		this.servings = servings;
 		this.description = desc;
 		this.category = category;
-		this.ingredients = new ArrayList<>();
-		this.steps = new ArrayList<>();
+		this.ingredients = new ArrayList<Ingredient>();
+		this.steps = new ArrayList<CookingStep>();
 	}
 
 	public Recipe(String name, int servings, String desc, Category category, List<Ingredient> ingredients,

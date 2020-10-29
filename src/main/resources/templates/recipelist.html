@@ -4,8 +4,8 @@
 <head>
 	<title>Recipes</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" 
-		th:href="@{css/bootstrap.min.css}" />
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" 
+		th:href="@{/css/bootstrap.min.css}" />
 	<style type="text/css">
 		body {margin: 20px;}
 	</style>
@@ -17,15 +17,22 @@
 	</div>
 	
 	<h2 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h2>
-	 <!--  
-	<form action="#" th:action="@{../recipelist/{categoryName}}" method="get">
+	   
+	<form action="#" th:action="@{recipelist}" th:object="${category}" method="post">
 		<div class="row">
-			<label for="categoryName">Search by category:</label>
-			<input type="text" th:name="categoryName" th:id="categoryName" placeholder="Category"/>
-			<input type="submit" value="Find" class="btn btn-primary"/>
+			<label class="col-sm-2" for="category">Search by category:</label>
+			<select id="category" th:field="*{categoryId}" name="category" class="col form-control">
+				<option th:each="cat : ${categories}"
+						th:value="${cat.categoryId}"
+						th:text="${cat.name}"></option>
+			</select>
+			<div class="col">
+				<input type="submit" value="Search" class="btn btn-primary"/>
+				<a href="/recipelist" class="btn btn-danger">Find All</a>
+			</div>
 		</div>
 	</form>
-	-->
+	
 	<table class="table table-striped">
 		<tr>
 			<th>Name</th>
@@ -38,12 +45,15 @@
 		<tr th:each="recipe : ${recipes}">
 			<td th:text="${recipe.name}"></td>
 			<td th:text="${recipe.category.name}"></td>
-			<td class="row">
-				<div><a th:href="@{/recipe/{id}(id=${recipe.recipeId})}" class="btn btn-success">SHOW</a></div>
-				<div sec:authorize="hasAuthority('ADMIN')">
-					<a th:href="@{/delete/{id}(id=${recipe.recipeId})}" class="btn btn-danger">Delete</a></div>
-				<div sec:authorize="hasAuthority('ADMIN')">
-					<a th:href="@{/edit/{id}(id=${recipe.recipeId})}" class="btn btn-info">Edit</a></div>
+			<td>
+				<div class="row">
+					<div class="col-sm-2"><a th:href="@{/recipe/{id}(id=${recipe.recipeId})}" class="btn btn-success">SHOW</a></div>
+					<div class="col-sm-2" sec:authorize="hasAuthority('ADMIN')">
+						<a th:href="@{/delete/{id}(id=${recipe.recipeId})}" class="btn btn-danger">Delete</a></div>
+					<div class="col-sm-2" sec:authorize="hasAuthority('ADMIN')">
+						<a th:href="@{/edit/{id}(id=${recipe.recipeId})}" class="btn btn-info">Edit</a></div>
+				</div>
+				
 			</td>
 			
 			

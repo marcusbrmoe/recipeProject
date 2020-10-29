@@ -70,7 +70,7 @@
           		</div>
           		<div id="steps" th:each="step, i : ${recipe.steps}">
           			<div class="row item form-group" id="${i.index}">
-          				<input type="text" class="col-sm-2 form-control" th:value="${i.index} + 1" readonly/>
+          				<input type="text" class="col-sm-2 form-control" th:name="*{steps[__${i.index}__].stepNum}" th:id="*{steps[__${i.index}__].stepNum}" th:value="${i.index} + 1" readonly/>
        					<input type="text" class="col form-control" id="stepdesc" placeholder="Direction" th:field="*{steps[__${i.index}__].description}">
 					</div>
           		</div>

@@ -7,9 +7,13 @@
 		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" 
 			th:href="@{css/bootstrap.min.css}" />
 		<style>
+			body {
+				margin: 20px;
+			}
 			form {
 				max-width: 800px;
 				margin: auto;
+				min-height: 400px;
 			}
 		</style>
     </head>
@@ -19,15 +23,17 @@
         	
             <input type="text" name="username" class="form-control mb-4" placeholder="Username" />
            	<input type="password" name="password" class="form-control mb-4" placeholder="Password"/>
-           	<input type="submit" value="Login" class="btn btn-primary col"/>
+           	<input type="submit" value="Login" class="btn btn-primary col-sm-2"/>
+           	<br />
+           	<div class="text-center">
+    			<div th:if="${param.error}">
+            		Invalid username and password.
+        		</div>
+        		<div th:if="${param.logout}">
+           			You have been logged out.
+        		</div>
+    		</div>
         </form>
-        <div class="text-center">
-    		<div th:if="${param.error}">
-            	Invalid username and password.
-        	</div>
-        	<div th:if="${param.logout}">
-           		You have been logged out.
-        	</div>
-    	</div>
+        
     </body>
 </html>

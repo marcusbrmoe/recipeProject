@@ -1,5 +1,7 @@
 package com.example.recipeProject.domain;
 
+import java.util.Comparator;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -73,11 +75,19 @@ public class CookingStep {
 	public void setRecipe(Recipe recipe) {
 		this.recipe = recipe;
 	}
-
-	@Override
-	public String toString() {
-		return "CookingStep [cookingStepId=" + cooking_step_id + ", stepNum=" + step_num + ", desc=" + description + ", recipe="
-				+ recipe + "]";
-	}
 	
+	//Sorting by ascending order.
+	public static Comparator<CookingStep> csStep = new Comparator<CookingStep>() {
+
+		public int compare(CookingStep s1, CookingStep s2) {
+
+		   int step1 = s1.getStepNum();
+		   int step2 = s2.getStepNum();
+
+		   /*For ascending order*/
+		   return step1-step2;
+
+		   /*For descending order*/
+		   //rollno2-rollno1;
+	   }};
 }

@@ -46,9 +46,8 @@
           			<div class="col form-group">Unit</div>
              	</div>
              	<div class="row" th:each="ingredient, i : ${recipe.ingredients}">
-             		<div class="col form-group d-none">
-                    	<input th:field="*{ingredients[__${i.index}__].ingredientId}" type="text" class="form-control">
-                   	</div>
+             		
+                    <input type="hidden" th:field="*{ingredients[__${i.index}__].ingredientId}" class="form-control">
 					<input type="text" id="ingredientname" th:field="*{ingredients[__${i.index}__].name}" class="col form-control"/>
 					<input type="text" id="ingredientamount" th:field="*{ingredients[__${i.index}__].amount}" class="col form-control"/>
 					<select id="mulist" th:field="*{ingredients[__${i.index}__].mu}" class="col form-control">
