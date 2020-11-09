@@ -1,0 +1,56 @@
+<!DOCTYPEhtml>
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<title>Error</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" 
+		th:href="@{/css/bootstrap.min.css}" />
+	<style>
+		body {margin: 20px;}
+		h1 {text-align: center;}
+		a {margin-bottom: 20px;}
+	</style>
+</head>
+<body>
+	
+	<div class="row">
+		<h1 class="col-sm-10">Error</h1>
+		<a href="/recipelist" class="btn btn-primary">Take me home</a>
+	</div>
+	
+	<table class="table">
+	    <tr>
+	        <td>Date</td>
+	        <td th:text="${timestamp}"></td>
+	    </tr>
+	    <tr>
+	        <td>Path</td>
+	        <td th:text="${path}"></td>
+	    </tr>
+	    <tr>
+	        <td>Error</td>
+	        <td th:text="${error}"></td>
+	    </tr>
+	    <tr>
+	        <td>Status</td>
+	        <td th:text="${status}"></td>
+	    </tr>
+	    <tr>
+	        <td>Message</td>
+	        <td th:text="${message}"></td>
+	    </tr>
+	    <tr>
+	        <td>Exception</td>
+	        <td th:text="${exception}"></td>
+	    </tr>
+	    <tr>
+	        <td>Trace</td>
+	        <td>
+	            <pre th:text="${trace}"></pre>
+	        </td>
+	    </tr>
+	</table>
+	
+</body>
+</html>

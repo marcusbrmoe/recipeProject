@@ -1,0 +1,33 @@
+<!DOCTYPEhtml>
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<title>404 Error</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" 
+		th:href="@{/css/bootstrap.min.css}" />
+	<style>
+		body {
+			margin: 20px;
+		}
+	</style>
+</head>
+<body>
+	
+	<div class="container">
+		<div class="text-center error-template">
+			<h1>Oops!</h1>
+			<h2>404 - Not Found!</h2>
+			
+			<div class="error-details">
+				<p>Sorry, an error has occured. Requested page not found!</p>
+			</div>
+			
+			<div class="error-actions">
+				<a href="/recipelist" class="btn btn-primary">Take me home</a>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>

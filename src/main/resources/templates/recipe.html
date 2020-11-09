@@ -34,10 +34,15 @@
 		<div th:each="step : *{steps}">
 			<div th:text="'Step ' + ${step.stepNum} + '. ' + ${step.description}"></div>
 		</div>
+		
+		<br />
+		<div class="row">
+			<a href="/recipelist" class="btn btn-danger">Back</a>
+			<div class="col-sm-2" sec:authorize="hasAuthority('ADMIN')">
+				<a th:href="@{/edit/{id}(id=${recipe.recipeId})}" class="btn btn-info">Edit</a></div>
+		</div>
+		
 	</div>
-	
-	<br />
-	<a href="/recipelist" class="btn btn-danger">Back</a>
 
 </body>
 </html>

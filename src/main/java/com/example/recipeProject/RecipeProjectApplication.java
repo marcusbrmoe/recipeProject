@@ -54,6 +54,7 @@ public class RecipeProjectApplication {
 			crepository.save(new Category("Cake"));
 			crepository.save(new Category("Indian"));
 			
+			
 			log.info("Delete all measuring units");
 			murepository.deleteAll();
 			log.info("save a couple of measuringunits");
@@ -63,7 +64,7 @@ public class RecipeProjectApplication {
 			murepository.save(new MeasuringUnit("g"));
 			murepository.save(new MeasuringUnit("l"));
 			murepository.save(new MeasuringUnit("dl"));
-			murepository.save(new MeasuringUnit("piece"));
+			murepository.save(new MeasuringUnit("piece(s)"));
 			
 			log.info("create a couple of recipes");
 			Recipe pizza = new Recipe("Pizza", 4, "A delicious Italian pizza!", crepository.findByName("Italian").get(0));

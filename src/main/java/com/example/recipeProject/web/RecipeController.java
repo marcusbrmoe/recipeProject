@@ -225,4 +225,5 @@ public class RecipeController {
 	public String login() {
 		return "login";
 	}
+	
 }
