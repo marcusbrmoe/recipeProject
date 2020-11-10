@@ -45,7 +45,7 @@
           			<div class="col form-group">Amount</div>
           			<div class="col form-group">Unit</div>
              	</div>
-             	<div class="row" th:each="ingredient, i : ${recipe.ingredients}">
+             	<div class="row item form-group" th:each="ingredient, i : ${recipe.ingredients}">
              		<div class="col form-group d-none">
                     	<input th:field="*{ingredients[__${i.index}__].ingredientId}" type="text" class="form-control">
                    	</div>
@@ -57,6 +57,8 @@
 						th:text="${mu.name}"></option>
 					</select>
 				</div>
+				<button class="btn btn-success" type="submit" name="action" value="AddIngredient" th:formaction="@{add}">Add Step</button>
+				<button class="btn btn-danger" type="submit" name="action" value="RemoveIngredient" th:formaction="@{add}">Remove Step</button>
 			</div>
 		</div>
 		<br />
@@ -74,6 +76,8 @@
        					<input type="text" class="col form-control" id="stepdesc" placeholder="Direction" th:field="*{steps[__${i.index}__].description}">
 					</div>
           		</div>
+          		<button class="btn btn-success" type="submit" name="action" value="AddStep" th:formaction="@{add}">Add Step</button>
+				<button class="btn btn-danger" type="submit" name="action" value="RemoveStep" th:formaction="@{add}">Remove Step</button>
 			</div>
 			<br />
 		</div>

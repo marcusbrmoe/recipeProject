@@ -49,12 +49,9 @@ public class RecipeController {
 	
 	@RequestMapping(value={"/recipelist", "/"}, method=RequestMethod.POST)
 	public String recipeByCatList(Category category, Model model) {
-		System.out.println("Hello :)");
-		
 		List<Recipe> recipes = repository.findByCategory(crepository.findById(category.getCategoryId()).get());
 		
 		model.addAttribute("recipes", recipes);
-		System.out.println(recipes);
 		model.addAttribute("category", new Category());
 		model.addAttribute("categories", crepository.findAll());
 		return "recipelist";
@@ -97,11 +94,11 @@ public class RecipeController {
 	public String addRecipe(Model model) {
 		Recipe one = new Recipe();
 		//Creating 10 spaces for ingredients and CookingSteps.
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 5; i++) {
 			one.addIngredient(new Ingredient());
 		}
 		
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 5; i++) {
 			one.addStep(new CookingStep());
 		}
 		model.addAttribute("recipe", one);
@@ -116,6 +113,7 @@ public class RecipeController {
 		Recipe x;
 		ArrayList<Ingredient> ing = new ArrayList<>();
 		ArrayList<CookingStep> cs = new ArrayList<>();
+		
 		//Saving new recipes.
 		if (recipe.getRecipeId() == 0) {
 			x = new Recipe();
@@ -207,14 +205,6 @@ public class RecipeController {
 		Recipe one = repository.findById(id).get();
 		Collections.sort(one.getSteps(), CookingStep.csStep);
 		
-		for (int i = 10; i > one.getIngredients().size();) {
-			one.addIngredient(new Ingredient());
-		}
-		
-		for (int i = 10; i > one.getSteps().size();) {
-			one.addStep(new CookingStep());
-		}
-		
 		model.addAttribute("recipe", one);
 		model.addAttribute("categories", crepository.findAll());
 		model.addAttribute("measuringunits", murepository.findAll());
@@ -224,6 +214,95 @@ public class RecipeController {
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String login() {
 		return "login";
+	}
+	
+	//ADD PAGE Remove and Add Ingredients and CookingSteps.
+	//Adding an ingredient to the ADD PAGE ingredient-list.
+	@RequestMapping(value="/add", method=RequestMethod.POST, params="action=AddIngredient") 
+	public String addIngredient(Recipe recipe, Model model) {
+		recipe.addIngredient(new Ingredient());;
+		
+		model.addAttribute("recipe", recipe);
+		model.addAttribute("categories", crepository.findAll());
+		model.addAttribute("measuringunits", murepository.findAll());
+		return "addrecipe";
+	}
+	
+	//Removing an ingredient from the ADD PAGE ingredient-list.
+	@RequestMapping(value="/add", method=RequestMethod.POST, params="action=RemoveIngredient") 
+	public String removeIngredient(Recipe recipe, Model model) {
+		recipe.getIngredients().remove(recipe.getIngredients().size() - 1);
+		
+		model.addAttribute("recipe", recipe);
+		model.addAttribute("categories", crepository.findAll());
+		model.addAttribute("measuringunits", murepository.findAll());
+		return "addrecipe";
+	}
+	
+	//Adding a cookingstep to the ADD PAGE directions-list.
+	@RequestMapping(value="/add", method=RequestMethod.POST, params="action=AddStep") 
+	public String addStep(Recipe recipe, Model model) {
+		recipe.addStep(new CookingStep());;
+		
+		model.addAttribute("recipe", recipe);
+		model.addAttribute("categories", crepository.findAll());
+		model.addAttribute("measuringunits", murepository.findAll());
+		return "addrecipe";
+	}
+	//Removing a cookingstep from the ADD PAGE directions-list.
+	@RequestMapping(value="/add", method=RequestMethod.POST, params="action=RemoveStep") 
+	public String removeStep(Recipe recipe, Model model) {
+		recipe.getSteps().remove(recipe.getSteps().size() - 1);
+		
+		model.addAttribute("recipe", recipe);
+		model.addAttribute("categories", crepository.findAll());
+		model.addAttribute("measuringunits", murepository.findAll());
+		return "addrecipe";
+	}
+	
+	//EDIT PAGE Remove and Add Ingredients and CookingSteps.
+	//Adding a cookingstep to the EDIT PAGE directions-list.
+	@RequestMapping(value="/edit", method=RequestMethod.POST, params="action=AddStep") 
+	public String addEditStep(Recipe recipe, Model model) {
+		recipe.addStep(new CookingStep());;
+			
+		model.addAttribute("recipe", recipe);
+		model.addAttribute("categories", crepository.findAll());
+		model.addAttribute("measuringunits", murepository.findAll());
+		return "editrecipe";
+	}
+	
+	//Removing a cookingstep from the EDIT PAGE directions-list.
+	@RequestMapping(value="/edit", method=RequestMethod.POST, params="action=RemoveStep") 
+	public String removeEditStep(Recipe recipe, Model model) {
+		recipe.getSteps().remove(recipe.getSteps().size() - 1);
+			
+		model.addAttribute("recipe", recipe);
+		model.addAttribute("categories", crepository.findAll());
+		model.addAttribute("measuringunits", murepository.findAll());
+		return "editrecipe";
+	}
+	
+	//Adding an ingredient to the EDIT PAGE ingredient-list.
+	@RequestMapping(value="/edit", method=RequestMethod.POST, params="action=AddIngredient") 
+	public String addEditIngredient(Recipe recipe, Model model) {
+		recipe.addIngredient(new Ingredient());;
+			
+		model.addAttribute("recipe", recipe);
+		model.addAttribute("categories", crepository.findAll());
+		model.addAttribute("measuringunits", murepository.findAll());
+		return "editrecipe";
+	}
+		
+	//Removing an ingredient from the EDIT PAGE ingredient-list.
+	@RequestMapping(value="/edit", method=RequestMethod.POST, params="action=RemoveIngredient") 
+	public String removeEditIngredient(Recipe recipe, Model model) {
+		recipe.getIngredients().remove(recipe.getIngredients().size() - 1);
+			
+		model.addAttribute("recipe", recipe);
+		model.addAttribute("categories", crepository.findAll());
+		model.addAttribute("measuringunits", murepository.findAll());
+		return "editrecipe";
 	}
 	
 }

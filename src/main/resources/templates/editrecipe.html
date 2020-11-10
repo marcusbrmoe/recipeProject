@@ -12,7 +12,7 @@
 </head>
 <body>
 	
-	<h1>Add Recipe</h1>
+	<h1>Edit Recipe</h1>
 	
 	<form action="#" th:object="${recipe}" th:action="@{../save}" method="post">
 		<input type="hidden" id="id" th:field="*{recipeId}" class="form-control">
@@ -45,7 +45,7 @@
           			<div class="col form-group">Amount</div>
           			<div class="col form-group">Unit</div>
              	</div>
-             	<div class="row" th:each="ingredient, i : ${recipe.ingredients}">
+             	<div class="row item form-group" th:each="ingredient, i : ${recipe.ingredients}">
              		
                     <input type="hidden" th:field="*{ingredients[__${i.index}__].ingredientId}" class="form-control">
 					<input type="text" id="ingredientname" th:field="*{ingredients[__${i.index}__].name}" class="col form-control"/>
@@ -56,6 +56,8 @@
 						th:text="${mu.name}"></option>
 					</select>
 				</div>
+				<button class="btn btn-success" type="submit" name="action" value="AddIngredient" th:formaction="@{../edit}">Add Ingredient</button>
+				<button class="btn btn-danger" type="submit" name="action" value="RemoveIngredient" th:formaction="@{../edit}">Remove Ingredient</button>
 			</div>
 		</div>
 			<br />
@@ -74,6 +76,8 @@
        					<input type="text" class="col form-control" id="stepdesc" placeholder="Direction" th:field="*{steps[__${i.index}__].description}">
 					</div>
           		</div>
+          		<button class="btn btn-success" type="submit" name="action" value="AddStep" th:formaction="@{../edit}">Add Step</button>
+				<button class="btn btn-danger" type="submit" name="action" value="RemoveStep" th:formaction="@{../edit}">Remove Step</button>
 			</div>
 			<br />
 		</div>
