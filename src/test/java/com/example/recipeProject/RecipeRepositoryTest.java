@@ -5,10 +5,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.Order;
+//import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+//import org.junit.jupiter.api.TestMethodOrder;
+//import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
@@ -19,7 +19,7 @@ import com.example.recipeProject.domain.Recipe;
 import com.example.recipeProject.domain.RecipeRepository;
 
 @DataJpaTest
-@TestMethodOrder(OrderAnnotation.class)
+//@TestMethodOrder(OrderAnnotation.class)
 class RecipeRepositoryTest {
 
 	@Autowired
@@ -28,7 +28,7 @@ class RecipeRepositoryTest {
 	private CategoryRepository crepository;
 	
 	@Test
-	@Order(1)
+	//@Order(1)
 	public void createNewRecipe() {
 		Recipe recipe = new Recipe("Sausage", 1, "The best sausage you have ever tasted!", crepository.findByName("Dinner").get(0), new ArrayList<Ingredient>(), new ArrayList<CookingStep>());
 		repository.save(recipe);
@@ -36,7 +36,7 @@ class RecipeRepositoryTest {
 	}
 	
 	@Test
-	@Order(2)
+	//@Order(2)
 	public void findRecipe() {
 		List<Recipe> recipe = repository.findByName("Sausage");
 		
@@ -45,7 +45,7 @@ class RecipeRepositoryTest {
 	}
 	
 	@Test
-	@Order(3)
+	//@Order(3)
 	public void deleteRecipe() {
 		List<Recipe> recipe = repository.findByName("Sausage");
 		

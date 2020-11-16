@@ -4,10 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.jupiter.api.Order;
+//import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+//import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+//import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
@@ -16,7 +16,7 @@ import com.example.recipeProject.domain.IngredientRepository;
 import com.example.recipeProject.domain.MeasuringUnitRepository;
 
 @DataJpaTest
-@TestMethodOrder(OrderAnnotation.class)
+//@TestMethodOrder(OrderAnnotation.class)
 class IngredientRepositoryTest {
 
 	@Autowired
@@ -25,7 +25,7 @@ class IngredientRepositoryTest {
 	private MeasuringUnitRepository murepository;
 	
 	@Test
-	@Order(1)
+	//@Order(1)
 	public void createNewIngredient() {
 		Ingredient ingredient = new Ingredient("Soap", 1.2, murepository.findByName("g"));
 		repository.save(ingredient);
@@ -33,7 +33,7 @@ class IngredientRepositoryTest {
 	}
 	
 	@Test
-	@Order(2)
+	//@Order(2)
 	public void findIngredient() {
 		List<Ingredient> ingredient = repository.findByName("Soap");
 		
@@ -42,7 +42,7 @@ class IngredientRepositoryTest {
 	}
 	
 	@Test
-	@Order(3)
+	//@Order(3)
 	public void deleteIngredient() {
 		List<Ingredient> ingredient = repository.findByName("Soap");
 		
