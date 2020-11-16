@@ -24,16 +24,16 @@ class IngredientRepositoryTest {
 	@Autowired
 	private MeasuringUnitRepository murepository;
 	
-	@Test
 	//@Order(1)
+	@Test
 	public void createNewIngredient() {
 		Ingredient ingredient = new Ingredient("Soap", 1.2, murepository.findByName("g"));
 		repository.save(ingredient);
 		assertThat(ingredient.getIngredientId()).isNotNull();
 	}
 	
-	@Test
 	//@Order(2)
+	@Test
 	public void findIngredient() {
 		List<Ingredient> ingredient = repository.findByName("Soap");
 		
@@ -41,8 +41,8 @@ class IngredientRepositoryTest {
 		assertThat(ingredient.get(0).getName()).isEqualTo("Soap");
 	}
 	
-	@Test
 	//@Order(3)
+	@Test
 	public void deleteIngredient() {
 		List<Ingredient> ingredient = repository.findByName("Soap");
 		

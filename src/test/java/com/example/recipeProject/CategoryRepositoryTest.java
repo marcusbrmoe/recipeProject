@@ -21,16 +21,18 @@ class CategoryRepositoryTest {
 	@Autowired
 	private CategoryRepository repository;
 	
-	@Test
+	
 	//@Order(1)
+	@Test
 	public void createNewCategory() {
 		Category category = new Category("Tasty");
 		repository.save(category);
 		assertThat(category.getCategoryId()).isNotNull();
 	}
 	
-	@Test
+	
 	//@Order(2)
+	@Test
 	public void findCategory() {
 		List<Category> category = repository.findByName("Tasty");
 		
@@ -38,8 +40,9 @@ class CategoryRepositoryTest {
 		assertThat(category.get(0).getName()).isEqualTo("Tasty");
 	}
 	
-	@Test
+	
 	//@Order(3)
+	@Test
 	public void deleteCategory() {
 		List<Category> category = repository.findByName("Tasty");
 		

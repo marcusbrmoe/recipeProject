@@ -21,16 +21,16 @@ class CookingStepRepositoryTest {
 	@Autowired
 	private CookingStepRepository repository;
 	
-	@Test
 	//@Order(1)
+	@Test
 	public void createNewCookingStep() {
 		CookingStep step = new CookingStep(1, "Cook 1 hour");
 		repository.save(step);
 		assertThat(step.getCookingStepId()).isNotNull();
 	}
 	
-	@Test
 	//@Order(2)
+	@Test
 	public void findCookingStep() {
 		List<CookingStep> step = repository.findByDescription("Cook 1 hour");
 		
@@ -38,8 +38,8 @@ class CookingStepRepositoryTest {
 		assertThat(step.get(0).getDescription()).isEqualTo("Cook 1 hour");
 	}
 	
-	@Test
 	//@Order(3)
+	@Test
 	public void deleteCookingStep() {
 		List<CookingStep> step = repository.findByDescription("Cook 1 hour");
 		
