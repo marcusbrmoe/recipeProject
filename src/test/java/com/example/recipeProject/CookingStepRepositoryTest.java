@@ -14,8 +14,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import com.example.recipeProject.domain.CookingStep;
 import com.example.recipeProject.domain.CookingStepRepository;
 
-@DataJpaTest
 //@TestMethodOrder(OrderAnnotation.class)
+@DataJpaTest
 class CookingStepRepositoryTest {
 
 	@Autowired

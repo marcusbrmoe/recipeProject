@@ -18,8 +18,9 @@ import com.example.recipeProject.domain.Ingredient;
 import com.example.recipeProject.domain.Recipe;
 import com.example.recipeProject.domain.RecipeRepository;
 
-@DataJpaTest
+
 //@TestMethodOrder(OrderAnnotation.class)
+@DataJpaTest
 class RecipeRepositoryTest {
 
 	@Autowired
