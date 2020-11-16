@@ -9,12 +9,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.example.recipeProject.domain.Category;
 import com.example.recipeProject.domain.CategoryRepository;
 
-@SpringBootTest
+@DataJpaTest
 @TestMethodOrder(OrderAnnotation.class)
 class CategoryRepositoryTest {
 
