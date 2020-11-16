@@ -4,17 +4,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
-//import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-//import org.junit.jupiter.api.TestMethodOrder;
-//import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.example.recipeProject.domain.Category;
 import com.example.recipeProject.domain.CategoryRepository;
 
-//@TestMethodOrder(OrderAnnotation.class)
+@TestMethodOrder(OrderAnnotation.class)
 @DataJpaTest
 class CategoryRepositoryTest {
 
@@ -22,7 +22,7 @@ class CategoryRepositoryTest {
 	private CategoryRepository repository;
 	
 	
-	//@Order(1)
+	@Order(1)
 	@Test
 	public void createNewCategory() {
 		Category category = new Category("Tasty");
@@ -31,7 +31,7 @@ class CategoryRepositoryTest {
 	}
 	
 	
-	//@Order(2)
+	@Order(2)
 	@Test
 	public void findCategory() {
 		List<Category> category = repository.findByName("Tasty");
@@ -41,7 +41,7 @@ class CategoryRepositoryTest {
 	}
 	
 	
-	//@Order(3)
+	@Order(3)
 	@Test
 	public void deleteCategory() {
 		List<Category> category = repository.findByName("Tasty");
