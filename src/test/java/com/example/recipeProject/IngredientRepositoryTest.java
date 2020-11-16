@@ -4,10 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
-//import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-//import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-//import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
@@ -15,7 +15,7 @@ import com.example.recipeProject.domain.Ingredient;
 import com.example.recipeProject.domain.IngredientRepository;
 import com.example.recipeProject.domain.MeasuringUnitRepository;
 
-//@TestMethodOrder(OrderAnnotation.class)
+@TestMethodOrder(OrderAnnotation.class)
 @DataJpaTest
 class IngredientRepositoryTest {
 
@@ -24,7 +24,7 @@ class IngredientRepositoryTest {
 	@Autowired
 	private MeasuringUnitRepository murepository;
 	
-	//@Order(1)
+	@Order(1)
 	@Test
 	public void createNewIngredient() {
 		Ingredient ingredient = new Ingredient("Soap", 1.2, murepository.findByName("g"));
@@ -32,7 +32,7 @@ class IngredientRepositoryTest {
 		assertThat(ingredient.getIngredientId()).isNotNull();
 	}
 	
-	//@Order(2)
+	@Order(2)
 	@Test
 	public void findIngredient() {
 		List<Ingredient> ingredient = repository.findByName("Soap");
@@ -41,7 +41,7 @@ class IngredientRepositoryTest {
 		assertThat(ingredient.get(0).getName()).isEqualTo("Soap");
 	}
 	
-	//@Order(3)
+	@Order(3)
 	@Test
 	public void deleteIngredient() {
 		List<Ingredient> ingredient = repository.findByName("Soap");
