@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add student</title>
+    <title>Sign up!</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
 </head>
@@ -16,7 +16,7 @@
 			</div>
 			<div>
 				<label> E-mail :<input type="text" th:field="*{email}" class="form-control"/></label>
-				<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Username Error</p>	
+				<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</p>	
 			</div>
 			<div>
 				<label> Password :<input type="password" th:field="*{password}" class="form-control"/></label>

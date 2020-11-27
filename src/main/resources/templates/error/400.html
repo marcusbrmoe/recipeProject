@@ -20,7 +20,7 @@
 			<h2>400 - Our database could not accept your values!</h2>
 			
 			<div class="error-details">
-				<p>Make sure you write the correct value to each field. The "Servings" and "Amount" fields require a number!</p>
+				<p>Make sure you write the correct value to each field.</p>
 			</div>
 			
 			<div class="error-actions">
@@ -28,6 +28,39 @@
 			</div>
 		</div>
 	</div>
+	
+	<table class="table">
+	    <tr>
+	        <td>Date</td>
+	        <td th:text="${timestamp}"></td>
+	    </tr>
+	    <tr>
+	        <td>Path</td>
+	        <td th:text="${path}"></td>
+	    </tr>
+	    <tr>
+	        <td>Error</td>
+	        <td th:text="${error}"></td>
+	    </tr>
+	    <tr>
+	        <td>Status</td>
+	        <td th:text="${status}"></td>
+	    </tr>
+	    <tr>
+	        <td>Message</td>
+	        <td th:text="${message}"></td>
+	    </tr>
+	    <tr>
+	        <td>Exception</td>
+	        <td th:text="${exception}"></td>
+	    </tr>
+	    <tr>
+	        <td>Trace</td>
+	        <td>
+	            <pre th:text="${trace}"></pre>
+	        </td>
+	    </tr>
+	</table>
 	
 </body>
 </html>

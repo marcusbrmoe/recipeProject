@@ -1,4 +1,4 @@
-package com.example.recipeProject.web;
+package com.example.recipeProject.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;

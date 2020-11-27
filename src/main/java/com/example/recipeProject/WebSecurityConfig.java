@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.example.recipeProject.web.UserDetailServiceImpl;
+import com.example.recipeProject.service.UserDetailServiceImpl;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled= true)
@@ -27,7 +27,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-			.authorizeRequests().antMatchers("/signup", "/saveuser", "/css/**", "/js/**").permitAll()
+			.authorizeRequests().antMatchers("/css/**", "/js/**", "/templates/**").permitAll()
+			.and()
+			.authorizeRequests().antMatchers("/signup", "/forgotpassword", "/resetpassword", "/saveuser", "/changepassword", "/updatepassword", "/updatepassword/**").permitAll()
 			.and()
 			.authorizeRequests()
 				.anyRequest().authenticated()
