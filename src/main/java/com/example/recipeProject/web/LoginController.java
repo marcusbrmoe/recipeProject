@@ -125,6 +125,8 @@ public class LoginController {
 			
 			return "updatepassword";
 		} else if (result == false) {
+			
+			prtrepository.delete(prtrepository.findByToken(token));
 			return "expiredtoken";
 		} else {
 			return "login";
