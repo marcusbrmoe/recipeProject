@@ -15,6 +15,9 @@
 				margin: auto;
 				min-height: 400px;
 			}
+			#fpassword {
+				margin-top: 10px; 
+			}
 		</style>
     </head>
     <body>
@@ -25,8 +28,9 @@
            	<input type="password" name="password" class="form-control mb-4" placeholder="Password"/>
            	<input type="submit" value="Login" class="btn btn-primary col-sm-2"/>
            	<a href="/signup" class="btn btn-success col-sm-2">Sign up!</a>
-           	<a href="/forgotpassword">Forgot Password?</a>
-           	
+           	<div id="fpassword">
+           		<a href="/forgotpassword">Forgot Password?</a>
+           	</div>
            	
            	<br />
            	<div class="text-center">
@@ -35,9 +39,6 @@
         		</div>
         		<div th:if="${param.logout}">
            			You have been logged out.
-        		</div>
-        		<div th:if="${param.resetpassword}">
-           			E-mail sent!  
         		</div>
     		</div>
         </form>

@@ -38,7 +38,7 @@ public class LoginController {
 		return "login";
 	}
 
-	@RequestMapping(value="signup")
+	@RequestMapping(value="/signup")
 	public String signUp(Model model){
 		model.addAttribute("signupform", new SignupForm());
 		return "signup";
@@ -46,8 +46,10 @@ public class LoginController {
 	
 	@RequestMapping(value="saveuser", method=RequestMethod.POST)
     public String saveUser(@Valid @ModelAttribute("signupform") SignupForm signupForm, BindingResult bindingResult) {
-    	if (!bindingResult.hasErrors()) { // validation errors
-    		if (signupForm.getPassword().equals(signupForm.getPasswordCheck())) { // Check password match		
+    	
+		if (!bindingResult.hasErrors()) { // validation errors
+    		
+			if (signupForm.getPassword().equals(signupForm.getPasswordCheck())) { // Check password match		
 	    		String pwd = signupForm.getPassword();
 		    	BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
 		    	String hashPwd = bc.encode(pwd);
@@ -59,13 +61,13 @@ public class LoginController {
 		    	newUser.setEmail(signupForm.getEmail());
 		    	if (lrepository.findByUsername(signupForm.getUsername()) == null) { // Check if user exists
 		    		lrepository.save(newUser);
-		    	}
-		    	else {
+		    	
+		    	} else {
 	    			bindingResult.rejectValue("username", "err.username", "Username already exists");    	
 	    			return "signup";		    		
 		    	}
-    		}
-    		else {
+    		
+			} else {
     			bindingResult.rejectValue("passwordCheck", "err.passCheck", "Passwords does not match");    	
     			return "signup";
     		}
@@ -85,40 +87,29 @@ public class LoginController {
 	@RequestMapping(value="resetpassword", method=RequestMethod.POST)
 	public String resetPassword(@Valid @ModelAttribute("forgotform") ForgotForm forgotForm, BindingResult bindingResult) {
 
-		if (!bindingResult.hasErrors()) {
-			try {
-				Login login = lrepository.findByEmail(forgotForm.getEmail());
-				if(login != null) {    
-				    String token = UUID.randomUUID().toString();
-					
-				    Date expiryDate = new Date();
-				    expiryDate.setTime(expiryDate.getTime() + 86400000); //Pluss 24 Hours!
-				    
-				    prtrepository.save(new PasswordResetToken(token, login, expiryDate));
-				    
-				    System.out.println(token.toString());
-				    System.out.println(login.getEmail());
-				    Email email = new Email();
-				    email.sendEmail("noreply.recipe@gmail.com", "Qwerty.789", login.getEmail(), "Reset key", "Secret key: " + "http://localhost:8080/updatepassword/" + token);
-				    
-			    	return "redirect:/login";
-				} else {
-					System.out.println("PRINT EEEROORO");
-			    	//bindingResult.rejectValue("email", "err.email", "E-mail not found"); 
-			    	return "forgotpassword";
-				}
-			} catch(Exception e){
-				System.out.println(e.getMessage());
-				System.out.println("User not found!");
-		    	//bindingResult.rejectValue("email", "err.email", "E-mail not found");    	
-    			return "forgotpassword";
-			}
+		if (!bindingResult.hasErrors()) { // Validation errors
 			
-	    	
+			Login login = lrepository.findByEmail(forgotForm.getEmail());
+			
+			if(login != null) {    
+			    String token = UUID.randomUUID().toString(); // Random token generation
+					
+			    Date expiryDate = new Date();
+			    expiryDate.setTime(expiryDate.getTime() + 86400000); // Pluss 24 Hours!
+				    
+			    prtrepository.save(new PasswordResetToken(token, login, expiryDate));
+				    
+			    Email email = new Email();
+			    email.sendEmail("noreply.recipe@gmail.com", "Qwerty.789", login.getEmail(), "Reset key", "Secret key: " + "https://marcusrecipeproject.herokuapp.com/updatepassword/" + token);
+				    
+			   	return "redirect:/login";
+			} else {
+			    bindingResult.rejectValue("email", "err.email", "E-mail not found"); // E-mail not found err
+			    return "forgotpassword";
+			}
+	    
 		} else {
-    		System.out.println("BINDING ERROR");
-    		System.out.println(bindingResult.getAllErrors());
-    		return "login";
+    		return "forgotpassword";
     	}
 	}
 	
@@ -128,42 +119,31 @@ public class LoginController {
 		Boolean result = validatePasswordResetToken(token);
 		
 		if(result == true) {
-			System.out.println("TOKEN OK");
 			UpdateForm updateForm = new UpdateForm();
 			updateForm.setToken(token);
 			model.addAttribute("updateform", updateForm);
 			
 			return "updatepassword";
 		} else if (result == false) {
-			System.out.println("TOKEN == FALSE, NOT VALID");
-			return "login";
+			return "expiredtoken";
 		} else {
-			System.out.println("TOKEN == NULL, NOT FOUND");
 			return "login";
 		}
 		
 	}
 	
 	@RequestMapping(value="/changepassword", method = RequestMethod.POST)
-	public String changePassword(@Valid @ModelAttribute("updateform") UpdateForm updateForm, 
-			Model model, BindingResult bindingResult) {
-		
-		System.out.println(updateForm.getPassword() + ' ' + updateForm.getToken());
-		
+	public String changePassword(@Valid @ModelAttribute("updateform") UpdateForm updateForm, BindingResult bindingResult) {
+				
 		PasswordResetToken token = prtrepository.findByToken(updateForm.getToken());
-		System.out.println(token);
-		
 		Login login = lrepository.findById(token.getLogin().getId());
-		System.out.println(login.getUsername());
 		
-		if(!bindingResult.hasErrors()) {
+		if(!bindingResult.hasErrors()) { // validation errors
 			Boolean result = validatePasswordResetToken(token.getToken());
 		    if(result == null) {
-		        System.out.println("Token not found!");
 		        
 		        return "redirect:/login";
 		    } else if(result == false) {
-		    	System.out.println("invalid token!");
 		        
 		        return "redirect:/login";
 		    } else {
@@ -176,25 +156,22 @@ public class LoginController {
 			    	login.setPasswordHash(hashPwd);
 			    	
 			    	lrepository.save(login);
-			    	System.out.println("Password changed!");
 			    	
 			        return "redirect:/login";
 		    	} else {
-		    		System.out.println("PASSWORD CHECK ERROR");
-		    		bindingResult.rejectValue("passwordCheck", "err.passCheck", "Passwords does not match");
+		    		bindingResult.rejectValue("passwordCheck", "err.passCheck", "Passwords does not match"); //Password match err
 		    		return "updatepassword";
 		    	}
 		    	
 		    }
 		} else {
-			System.out.println("BINDING ERROR");
 			return "updatepassword";
 		}
 		
 	}
 	
 	
-	public Boolean validatePasswordResetToken(String token) {
+	public Boolean validatePasswordResetToken(String token) { // Checking if token is valid 
 	    final PasswordResetToken passToken = prtrepository.findByToken(token);
 	    
 	    if( passToken != null) {

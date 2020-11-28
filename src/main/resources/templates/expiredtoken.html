@@ -1,0 +1,18 @@
+<!DOCTYPEhtml>
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<title>Forgot Password</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" 
+		th:href="@{/css/bootstrap.min.css}" />
+	<style type="text/css">
+		body {margin: 20px;}
+	</style>
+</head>
+<body>
+	<h1>The URL has expired!</h1>
+	<p>Please return to the login page and request a new link from the <q>forgot password?</q> button.</p>
+	<a href="/login" class="btn btn-primary">To login page</a>
+</body>
+</html>
