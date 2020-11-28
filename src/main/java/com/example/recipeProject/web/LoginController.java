@@ -157,6 +157,8 @@ public class LoginController {
 			    	
 			    	lrepository.save(login);
 			    	
+			    	prtrepository.delete(token);
+			    	
 			        return "redirect:/login";
 		    	} else {
 		    		bindingResult.rejectValue("passwordCheck", "err.passCheck", "Passwords does not match"); //Password match err
