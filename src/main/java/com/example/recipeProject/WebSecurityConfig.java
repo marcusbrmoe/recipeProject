@@ -31,6 +31,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.authorizeRequests().antMatchers("/signup", "/forgotpassword", "/resetpassword", "/saveuser", "/changepassword", "/updatepassword", "/updatepassword/**").permitAll()
 			.and()
+			.authorizeRequests().antMatchers("/recipes", "/cookingsteps", "/ingredients", "/recipes/**").permitAll() //Allowing REST Service without login.
+			.and()
 			.authorizeRequests()
 				.anyRequest().authenticated()
 				.and()

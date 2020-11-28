@@ -66,30 +66,6 @@ public class RecipeController {
 		return "recipe";
 	}
 	
-	//REST Show all Recipes.
-	@RequestMapping(value="/recipes", method=RequestMethod.GET)
-	public @ResponseBody List<Recipe> recipeListRest() {
-		return (List<Recipe>) repository.findAll();
-	}
-	
-	//REST Show all Ingredients.
-	@RequestMapping(value="/ingredients", method=RequestMethod.GET)
-	public @ResponseBody List<Ingredient> ingredientListRest() {
-		return (List<Ingredient>) irepository.findAll();
-	}
-	
-	//REST Show all CookingSteps.
-	@RequestMapping(value="/cookingsteps", method=RequestMethod.GET)
-	public @ResponseBody List<CookingStep> cookingStepListRest() {
-		return (List<CookingStep>) csrepository.findAll();
-	}
-		
-	//REST Show Recipe by ID.
-	@RequestMapping(value="/recipes/{id}", method=RequestMethod.GET)
-	public @ResponseBody Optional<Recipe> findRecipesRest(@PathVariable("id") long recipeId) {
-		return repository.findById(recipeId);
-	}
-	
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public String addRecipe(Model model) {
 		Recipe one = new Recipe();
@@ -300,4 +276,28 @@ public class RecipeController {
 		return "editrecipe";
 	}
 	
+	//REST Show all Recipes.
+	@RequestMapping(value="/recipes", method=RequestMethod.GET)
+	public @ResponseBody List<Recipe> recipeListRest() {
+		return (List<Recipe>) repository.findAll();
+	}
+		
+	//REST Show all Ingredients.
+	@RequestMapping(value="/ingredients", method=RequestMethod.GET)
+	public @ResponseBody List<Ingredient> ingredientListRest() {
+		return (List<Ingredient>) irepository.findAll();
+	}
+		
+	//REST Show all CookingSteps.
+	@RequestMapping(value="/cookingsteps", method=RequestMethod.GET)
+	public @ResponseBody List<CookingStep> cookingStepListRest() {
+		return (List<CookingStep>) csrepository.findAll();
+	}
+			
+	//REST Show Recipe by ID.
+	@RequestMapping(value="/recipes/{id}", method=RequestMethod.GET)
+	public @ResponseBody Optional<Recipe> findRecipesRest(@PathVariable("id") long recipeId) {
+		return repository.findById(recipeId);
+	}
+		
 }

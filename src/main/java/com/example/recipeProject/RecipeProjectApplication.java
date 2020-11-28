@@ -53,6 +53,11 @@ public class RecipeProjectApplication {
 			crepository.save(new Category("Italian"));
 			crepository.save(new Category("Cake"));
 			crepository.save(new Category("Indian"));
+			crepository.save(new Category("Sides"));
+			crepository.save(new Category("Breakfast"));
+			crepository.save(new Category("Evening snack"));
+			crepository.save(new Category("Sweets"));
+			crepository.save(new Category("Pastry"));
 			
 			
 			log.info("Delete all measuring units");
@@ -97,6 +102,7 @@ public class RecipeProjectApplication {
 			csrepository.save(soupOne);
 			csrepository.save(soupTwo);
 			*/
+
 		};
 	}
 
