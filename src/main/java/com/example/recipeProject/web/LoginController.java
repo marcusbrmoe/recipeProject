@@ -126,7 +126,7 @@ public class LoginController {
 			return "updatepassword";
 		} else if (result == false) {
 			
-			prtrepository.delete(prtrepository.findByToken(token));
+			prtrepository.delete(prtrepository.findByToken(token)); // Deleting token if it is invalid. 
 			return "expiredtoken";
 		} else {
 			return "login";
@@ -142,7 +142,7 @@ public class LoginController {
 		
 		if(!bindingResult.hasErrors()) { // validation errors
 			Boolean result = validatePasswordResetToken(token.getToken());
-		    if(result == null) {
+		    if(result == null) { // Double cheking token validity. Prevents change if token runns out after page is loaded. 
 		        
 		        return "redirect:/login";
 		    } else if(result == false) {
@@ -159,7 +159,7 @@ public class LoginController {
 			    	
 			    	lrepository.save(login);
 			    	
-			    	prtrepository.delete(token);
+			    	prtrepository.delete(token); // Deleting token after use.
 			    	
 			        return "redirect:/login";
 		    	} else {

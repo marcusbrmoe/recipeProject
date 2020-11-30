@@ -97,17 +97,17 @@ public class RecipeController {
 			x.setDescription(recipe.getDescription());
 			x.setName(recipe.getName());
 			x.setServings(recipe.getServings());
-			repository.save(x);
+			repository.save(x); // Saving recipe to generate ID. 
 			
 			for (Ingredient ingredient : recipe.getIngredients()) {
 				if (ingredient.getName().equals("") == false) {
-					ingredient.setRecipe(x);
+					ingredient.setRecipe(x); // Setting recipe reference in each ingredient.
 					irepository.save(ingredient);
 				} 
 			}
 			
 			int i = 1;
-			for (CookingStep step : recipe.getSteps()) {
+			for (CookingStep step : recipe.getSteps()) { // Setting recipe reference and stepnumber in each step. 
 				if (step.getRecipe() != null) {
 					step.setStepNum(i);
 					csrepository.save(step);
@@ -127,13 +127,13 @@ public class RecipeController {
 				if (ingredient.getName().equals("") == true) {
 					ingredient = null;
 				} else {
-					ingredient.setRecipe(x);
+					ingredient.setRecipe(x); // Setting recipe reference in each ingredient.
 					ing.add(ingredient);
 				}
 			}
 			
 			int i = 1;
-			for (CookingStep step : x.getSteps()) {
+			for (CookingStep step : x.getSteps()) { // Setting recipe reference and stepnumber in each step.
 				if (step.getDescription().equals("") == true) {
 					step = null;
 				} else {
@@ -150,7 +150,7 @@ public class RecipeController {
 			x.setDescription(recipe.getDescription());
 			x.setName(recipe.getName());
 			x.setServings(recipe.getServings());
-			repository.save(x);
+			repository.save(x); // Saving/updating recipe. 
 			
 		}
 
