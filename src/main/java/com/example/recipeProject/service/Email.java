@@ -32,7 +32,8 @@ public class Email {
                 });
 
         try {
-
+        	
+        	//Creating message and sending. 
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("noreply.recipe@gmail.com"));
             message.setRecipients(
@@ -43,8 +44,6 @@ public class Email {
             message.setText(emailContent);
 
             Transport.send(message);
-
-            System.out.println("Done");
 
         } catch (MessagingException e) {
             e.printStackTrace();
