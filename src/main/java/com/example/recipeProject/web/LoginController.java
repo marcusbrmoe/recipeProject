@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.example.recipeProject.domain.Email;
 import com.example.recipeProject.domain.ForgotForm;
 import com.example.recipeProject.domain.Login;
 import com.example.recipeProject.domain.LoginRepository;
@@ -23,6 +22,7 @@ import com.example.recipeProject.domain.PasswordResetToken;
 import com.example.recipeProject.domain.PasswordResetTokenRepository;
 import com.example.recipeProject.domain.SignupForm;
 import com.example.recipeProject.domain.UpdateForm;
+import com.example.recipeProject.service.Email;
 
 @Controller
 public class LoginController {

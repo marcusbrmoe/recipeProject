@@ -18,7 +18,6 @@ import com.example.recipeProject.domain.Ingredient;
 import com.example.recipeProject.domain.Recipe;
 import com.example.recipeProject.domain.RecipeRepository;
 
-
 @TestMethodOrder(OrderAnnotation.class)
 @DataJpaTest
 class RecipeRepositoryTest {

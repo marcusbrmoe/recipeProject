@@ -1,4 +1,4 @@
-package com.example.recipeProject.domain;
+package com.example.recipeProject.service;
 
 import java.util.Properties;
 
