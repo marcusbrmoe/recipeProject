@@ -10,8 +10,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.example.recipeProject.web.RecipeController;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
 class RecipeProjectApplicationTests {
 
 	@Autowired
