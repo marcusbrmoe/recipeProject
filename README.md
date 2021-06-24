@@ -6,9 +6,9 @@ Backend code is the main focus of the application and therefore the frontend is 
 
 A live version of the application can be found [here](https://marcusrecipeproject.herokuapp.com/login).
 
-Please feel free to sign up with your own personal account, or you can use the login bellow. 
+Please feel free to sign up with your own personal account, or you can use the login bellow.
 
-Username: user 
+Username: user <br>
 Password: user
 
 ## Technologies
